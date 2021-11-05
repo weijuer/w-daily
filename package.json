@@ -1,0 +1,26 @@
+{
+  "name": "w-daily",
+  "version": "1.0.0",
+  "description": "A tool for grab daily data from github trending",
+  "author": "Weijuer",
+  "license": "ISC",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "serve": "node main.js",
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weijuer/w-daily.git"
+  },
+  "bugs": {
+    "url": "https://github.com/weijuer/w-daily/issues"
+  },
+  "homepage": "https://github.com/weijuer/w-daily#readme",
+  "devDependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10",
+    "puppeteer": "^11.0.0"
+  }
+}

@@ -1,0 +1,30 @@
+name: w-daily CI
+
+on:
+  schedule:
+    # 每天凌晨00:00和15:00 执行
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  climb-daily-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+          cache: "yarn"
+      - name: Install dependencies
+        run: |
+          yarn --frozen-lockfile
+          yarn serve
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v7.3.0
+        with:
+          github_token: ${{secrets.DAILY_ACCESS_TOKEN}}
