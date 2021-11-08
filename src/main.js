@@ -1,4 +1,4 @@
-import { scrape } from "./utils/spider.js";
+import browser from "./utils/browser.js";
 import { saveLocalData } from "./utils/file.js";
 
 const scrapeArticles = async () => {
@@ -6,7 +6,7 @@ const scrapeArticles = async () => {
   const options = {
     url: "https://www.infoq.cn/topic/Front-end",
     target: ".article-list>.list>.article-item",
-    property: {
+    properties: {
       title: ".info .com-article-title",
       url: ".info .com-article-title",
       description: ".info .summary",
@@ -16,9 +16,10 @@ const scrapeArticles = async () => {
   };
 
   // 爬取日志
-  const articles = await scrape(options);
+  const articles = await browser.scrape(options);
 
-  // await saveLocalData(articles);
+  // 存储本地
+  await saveLocalData(articles);
 };
 
 // init

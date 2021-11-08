@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from "fs";
  * 格式化JSON数据
  * @param {*} data
  */
-export const toJSONString = (data) => {
+export const formatJSONString = (data) => {
   return JSON.stringify(data, null, 4);
 };
 
@@ -22,7 +22,7 @@ export const makeDirSync = (targetDir) => {
  * @param {*} data
  */
 export const saveFileSync = (file, data) => {
-  writeFileSync(file, toJSONString(data));
+  writeFileSync(file, formatJSONString(data));
 };
 
 /**

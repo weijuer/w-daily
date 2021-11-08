@@ -11,10 +11,11 @@ export const scrape = ({ url: uri, target, property } = {}) => {
       if (error) {
         console.log(error);
       } else {
+        console.log("inside callback");
         console.log(res);
         const $ = res.$;
-        const list = process(target, property);
-        console.log("inside callback", list);
+        console.log("target.length", $(target).length);
+        // const list = process(target, property);
       }
 
       done();
