@@ -1,6 +1,7 @@
 import cheerio from "cheerio";
 import service from "./utils/service.js";
 import Crawler from "crawler";
+import puppeteer from "puppeteer";
 
 const crawler = new Crawler();
 
@@ -42,4 +43,13 @@ async function run() {
   console.log("run...", $);
 }
 
-scrape(options);
+(async () => {
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
+  const page = await browser.newPage();
+  await page.goto("https://www.baidu.com");
+  await page.screenshot({ path: "example.png" });
+
+  await browser.close();
+})();

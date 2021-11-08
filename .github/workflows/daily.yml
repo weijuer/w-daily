@@ -25,6 +25,7 @@ jobs:
           yarn --frozen-lockfile
           yarn serve
       - name: Add & Commit
-        uses: EndBug/add-and-commit@v7.3.0
+        uses: EndBug/add-and-commit@v7
         with:
+          message: "daily"
           github_token: ${{secrets.DAILY_ACCESS_TOKEN}}
