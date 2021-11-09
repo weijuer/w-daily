@@ -31,7 +31,7 @@ export const saveFileSync = (file, data) => {
  */
 export const saveLocalData = async (data) => {
   // 当前日期
-  const today = new Date().toLocaleDateString("zh").replace(/\//g, "-");
+  const today = new Date().toJSON().slice(0, 10);
   const [year, month] = today.split("-");
   const dirname = `data/${year}/${month}`;
   // 创建文件夹
