@@ -1,14 +1,13 @@
 {
   "name": "w-daily",
   "version": "1.0.0",
-  "description": "A tool for grab daily data from github trending",
+  "description": "An awnsome fronend daily blog",
   "author": "Weijuer",
-  "license": "ISC",
-  "main": "main.js",
-  "type": "module",
+  "license": "MIT",
   "scripts": {
-    "serve": "node src/main.js",
-    "dev": "node src/test.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -18,10 +17,16 @@
     "url": "https://github.com/weijuer/w-daily/issues"
   },
   "homepage": "https://github.com/weijuer/w-daily#readme",
+  "dependencies": {
+    "axios": "0.24.0",
+    "vue": "^3.2.21",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
+  },
   "devDependencies": {
-    "axios": "^0.24.0",
-    "cheerio": "^1.0.0-rc.10",
-    "crawler": "^1.3.0",
-    "puppeteer": "^11.0.0"
+    "@vitejs/plugin-vue": "^1.9.4",
+    "@vue/compiler-sfc": "^3.2.21",
+    "stylus": "^0.55.0",
+    "vite": "^2.6.14"
   }
 }

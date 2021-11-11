@@ -1,26 +1,21 @@
-import browser from "./utils/browser.js";
-import { saveLocalData } from "./utils/file.js";
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import { Pin, LoadMore } from './directives';
+// 全局引入样式文件
+import 'w-design-vue/lib/style.css';
+import wd from 'w-design-vue';
 
-const scrapeArticles = async () => {
-  // 目标
-  const options = {
-    url: "https://www.infoq.cn/topic/Front-end",
-    target: ".article-list>.list>.article-item",
-    properties: {
-      title: ".info .com-article-title",
-      url: ".info .com-article-title",
-      description: ".info .summary",
-      author: ".info .editor a.com-author-name",
-      lastModified: ".info .author-date-wrap .date"
-    }
-  };
-
-  // 爬取日志
-  const articles = await browser.scrape(options);
-
-  // 存储本地
-  await saveLocalData(articles);
-};
-
-// init
-scrapeArticles();
+// 创建Vue应用，
+const app = createApp(App);
+// 注册插件
+app.use(router);
+app.use(store);
+// 使用w-design-vue
+app.use(wd);
+// 注册全局指令
+app.directive('pin', Pin);
+app.directive('loadmore', LoadMore);
+// 挂载Vue应用
+app.mount('#app');
