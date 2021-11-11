@@ -1,6 +1,11 @@
 import puppeteer from "puppeteer";
-import { log } from "./utils.js";
+import chalk from "chalk";
 import { randomUA } from "./user-agent.js";
+
+const log = (...args) => {
+  args.unshift(chalk.yellow("[Brower]"));
+  return console.log.apply(console, args);
+};
 
 class Browser {
   constructor(options = {}) {
@@ -24,6 +29,8 @@ class Browser {
     this.browser = null;
     // 页面对象
     this.page = null;
+    // 拦截请求数据
+    this.data = null;
   }
 
   /**
@@ -55,7 +62,7 @@ class Browser {
    * 打开浏览器
    * @param {*} url
    */
-  async open(url) {
+  async initPage() {
     // 启动浏览器
     await this.start();
     // 创建一个page对象
@@ -66,20 +73,30 @@ class Browser {
     await this.page.setViewport({ width: 1280, height: 1080 });
     // 允许执行js脚本
     await this.page.setJavaScriptEnabled(true);
-    // 跳转到目标地址
+    // 监听页面日志
+    this.page.on("console", (msg) =>
+      console.log(chalk.green("[page]:"), msg.text())
+    );
+  }
+
+  /**
+   * 跳转到目标地址
+   * @param {*} url
+   */
+  async open(url) {
+    log("目标地址跳转...");
     await this.page.goto(url, {
       timeout: 7000,
       waitUntil: "networkidle2"
     });
-
-    // 监听页面日志
-    this.page.on("console", (msg) => console.log("[page]:", msg.text()));
   }
 
   /**
    * 打印PDF
    */
   async printPDF(url) {
+    // init
+    await this.initPage();
     // 打开浏览器
     await this.open(url);
     log("开始打印PDF中...");
@@ -93,6 +110,8 @@ class Browser {
    * 截屏
    */
   async screenshot(url) {
+    // init
+    await this.initPage();
     // 打开浏览器
     await this.open(url);
     log("开始截图中...");
@@ -112,23 +131,53 @@ class Browser {
    * @param options 数据处理对象
    */
   async scrape({ url, target, properties } = {}) {
+    // init
+    await this.initPage();
     log("主程序加载中...");
     // 打开浏览器
     await this.open(url);
-    log("页面初次加载完毕, 等待目标元素... target:===>", target);
+    log(`页面初次加载完毕, 等待目标元素(${target})...`);
     // 等待被选的元素
     await this.page.waitForSelector(target);
     log("目标元素已加载...");
 
     // 分析数据
-    log(`开始分析数据...`);
+    log("开始分析数据...");
     const result = await this.evaluate(target, properties);
-    log("分析数据完成... result:===>", JSON.stringify(result, null, 4));
+    log("分析数据完成...");
 
     // 关闭浏览器
     await this.exit();
 
     return result;
+  }
+
+  /**
+   * 请求拦截
+   * @param {*} options
+   */
+  async scrapeResponse({ url, target } = {}) {
+    // init
+    await this.initPage();
+    log("请求拦截加载中...");
+    // 订阅reponse事件
+    this.page.on("response", async (response) => {
+      // 截取目标请求
+      if (response.url().includes(target)) {
+        log(`获取目标(${target})请求中`);
+        const { data } = await response.json();
+        this.data = data;
+        log(`获取请求数据(${chalk.redBright(data.length)})条`);
+      }
+    });
+
+    // 打开浏览器
+    await this.open(url);
+
+    // 关闭浏览器
+    await this.exit();
+
+    return this.data;
   }
 
   /**
