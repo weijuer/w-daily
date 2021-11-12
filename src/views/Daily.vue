@@ -53,9 +53,15 @@ function jump(name) {
   height: 180px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .grid {
-    grid-template-columns: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 568px) {
+  .grid {
+    grid-auto-columns: minmax(100px, 1fr);
   }
 }
 </style>

@@ -12,7 +12,7 @@ export function generateRoutes() {
     const name = fileName.match(/([a-zA-Z\-]+)\.vue$/)[1];
     routes.push({
       name,
-      path: `/${name}`,
+      path: `/${name === 'NotFound' ? ':pathMatch(.*)*' : name}`,
       component,
     });
 

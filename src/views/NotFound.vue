@@ -1,26 +1,28 @@
 <template>
   <div class="theme">
     <h1>404</h1>
+    <w-icon class="not-found" name="tv" />
     <blockquote>{{ getMsg() }}</blockquote>
-    <a href="/" aria-label="go to home">
-      Take me home.
-    </a>
+    <a href="/" aria-label="go to home"> Take me home. </a>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup>
 const msgs = [
   `There's nothing here.`,
   `How did we get here?`,
   `That's a Four-Oh-Four.`,
-  `Looks like we've got some broken links.`
-]
-export default defineComponent({
-  setup: () => ({
-    getMsg() {
-      return msgs[Math.floor(Math.random() * msgs.length)]
-    }
-  })
-})
+  `Looks like we've got some broken links.`,
+];
+
+function getMsg() {
+  return msgs[Math.floor(Math.random() * msgs.length)];
+}
 </script>
+
+<style lang="stylus" scoped>
+.not-found {
+  width: 260px;
+  height: 260px;
+}
+</style>
