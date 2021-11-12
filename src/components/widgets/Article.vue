@@ -5,9 +5,7 @@
         :data-id="article._id"
         v-if="isLinked"
         :to="{ name: 'article-detail', query: { id: article._id } }"
-        target="_blank"
-        >{{ article.title }}</router-link
-      >
+      >{{ article.title }}</router-link>
       <span v-else>{{ article.title }}</span>
     </header>
     <div class="article-author">
@@ -24,39 +22,34 @@
         :key="`tag-${index}`"
         class="tag-item bg-color"
         href="tag/"
-        >{{ tag }}</a
-      >
+      >{{ tag }}</a>
     </div>
   </div>
 </template>
 
-<script>
-import { reactive, computed, toRefs } from 'vue'
+<script setup>
+import { computed } from 'vue';
 
+const props = defineProps({
+  type: { type: String, default: 'normal' },
+  article: { default: () => { }, type: Object },
+});
+
+const emit = defineEmits(['desc-click']);
+
+const tags = computed(() => props.article.tags && props.article.tags.split(','));
+const articleType = computed(() => (props.type ? `article-${props.type}` : ''));
+const isLinked = computed(() => props.type && props.type === 'list');
+
+function moreLink(article) {
+  return `https://www.infoq.cn${article.url}`;
+}
+</script>
+
+<script>
 export default {
   name: 'w-article',
-  props: {
-    type: { type: String, default: 'normal' },
-    article: { default: () => {}, type: Object }
-  },
-  emits: ['desc-click'],
-  setup(props) {
-    const state = reactive({
-      tags: computed(() => props.article.tags && props.article.tags.split(',')),
-      articleType: computed(() => (props.type ? `article-${props.type}` : '')),
-      isLinked: computed(() => props.type && props.type === 'list')
-    })
-
-    function moreLink(article) {
-      return `https://www.infoq.cn${article.url}`
-    }
-
-    return {
-      ...toRefs(state),
-      moreLink
-    }
-  }
-}
+};
 </script>
 
 <style lang="stylus">
@@ -71,7 +64,7 @@ export default {
 
   &:hover {
     background: linear-gradient(to right, #da1b60, #ff8a00);
-    background-clip: text;
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     box-decoration-break: clone;
     border-bottom: 1px solid #ff8a00;

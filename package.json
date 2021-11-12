@@ -20,8 +20,9 @@
   "dependencies": {
     "axios": "0.24.0",
     "vue": "^3.2.21",
+    "vuex": "^4.0.2",
     "vue-router": "^4.0.12",
-    "vuex": "^4.0.2"
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.4",

@@ -1,4 +1,5 @@
 import { createStore, createLogger } from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import base from './modules/base';
 import daily from './modules/daily';
 
@@ -10,5 +11,7 @@ export default createStore({
     daily,
   },
   strict: debug,
-  plugins: debug ? [createLogger()] : [],
+  plugins: debug
+    ? [createLogger(), createPersistedState({ storage: window.sessionStorage })]
+    : [createPersistedState({ storage: window.sessionStorage })],
 });

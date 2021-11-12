@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { generateRoutes } from 'Utils/routes';
+import { generateRoutes } from 'Utils/routerUtils';
 
 const customRoutes = generateRoutes();
 

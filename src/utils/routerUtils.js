@@ -1,6 +1,8 @@
 // 引入views下及其子目录下所有的.vue文件
 const modules = import.meta.glob('../views/**/*.vue');
 
+console.log('modules', modules);
+
 /**
  * 根据文件夹生成路由
  */

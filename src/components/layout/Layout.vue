@@ -1,8 +1,10 @@
 <template>
-  <Symbols />
-  <Header />
-  <Main />
-  <Footer />
+  <div class="app-layout default">
+    <Symbols />
+    <Header />
+    <Main />
+    <Footer />
+  </div>
 </template>
 
 <script setup>

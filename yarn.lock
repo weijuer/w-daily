@@ -163,6 +163,11 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.nlark.com/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deepmerge@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.nlark.com/deepmerge/download/deepmerge-4.2.2.tgz?cache=0&sync_timestamp=1622025358084&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdeepmerge%2Fdownload%2Fdeepmerge-4.2.2.tgz#44d2ea3679b8f4d4ffba33f03d865fc1e7bf4955"
+  integrity sha1-RNLqNnm49NT/ujPwPYZfwee/SVU=
+
 esbuild-android-arm64@0.13.13:
   version "0.13.13"
   resolved "https://registry.npmmirror.com/esbuild-android-arm64/download/esbuild-android-arm64-0.13.13.tgz?cache=0&sync_timestamp=1636439969683&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-android-arm64%2Fdownload%2Fesbuild-android-arm64-0.13.13.tgz#da07b5fb2daf7d83dcd725f7cf58a6758e6e702a"
@@ -425,6 +430,11 @@ semver@^6.3.0:
   resolved "https://registry.nlark.com/semver/download/semver-6.3.0.tgz?cache=0&sync_timestamp=1618846864940&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=
 
+shvl@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/shvl/download/shvl-2.0.3.tgz?cache=0&sync_timestamp=1618213418806&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fshvl%2Fdownload%2Fshvl-2.0.3.tgz#eb4bd37644f5684bba1fc52c3010c96fb5e6afd1"
+  integrity sha1-60vTdkT1aEu6H8UsMBDJb7Xmr9E=
+
 source-map-js@^0.6.2:
   version "0.6.2"
   resolved "https://registry.npmmirror.com/source-map-js/download/source-map-js-0.6.2.tgz?cache=0&sync_timestamp=1636400753943&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsource-map-js%2Fdownload%2Fsource-map-js-0.6.2.tgz#0bb5de631b41cfbda6cfba8bd05a80efdfd2385e"
@@ -496,6 +506,14 @@ vue@^3.2.21:
     "@vue/runtime-dom" "3.2.21"
     "@vue/server-renderer" "3.2.21"
     "@vue/shared" "3.2.21"
+
+vuex-persistedstate@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.nlark.com/vuex-persistedstate/download/vuex-persistedstate-4.1.0.tgz#127165f85f5b4534fb3170a5d3a8be9811bd2a53"
+  integrity sha1-EnFl+F9bRTT7MXCl06i+mBG9KlM=
+  dependencies:
+    deepmerge "^4.2.2"
+    shvl "^2.0.3"
 
 vuex@^4.0.2:
   version "4.0.2"
