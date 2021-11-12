@@ -1,13 +1,7 @@
 <template>
   <section class="daily-page">
-    <article class="grid">
-      <w-card
-        class="daily-card"
-        v-for="item in dailies"
-        :key="item.name"
-        :title="item.name"
-        @click="jump(item.name)"
-      >
+    <article class="grid dailies">
+      <w-card v-for="item in dailies" :key="item.name" :title="item.name" @click="jump(item.name)">
         <img
           class="daily-card-img"
           src="https://1source.unsplash.com/random/240x240/?nature,water"
@@ -21,7 +15,7 @@
 <script setup>
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 import { Article as WArticle } from 'Widgets';
 
 const dailies = computed(() => store.getters['daily/dailies']);
@@ -42,6 +36,17 @@ function jump(name) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2%;
+}
+
+.dailies {
+  .w-card {
+    transition: transform 0.2s linear;
+
+    &:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow: 0 0 6px rgb(0 0 0 / 10%), 0 4px 6px rgb(0 0 0 / 10%);
+    }
+  }
 }
 
 .daily-card-img {
