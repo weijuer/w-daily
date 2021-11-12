@@ -86,9 +86,9 @@ class Browser {
   async open(url) {
     log("目标地址跳转...");
     await this.page.goto(url, {
-      timeout: 7000,
       waitUntil: "networkidle2"
     });
+    log(`已跳转至目标(${url})地址...`);
   }
 
   /**
