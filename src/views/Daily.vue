@@ -1,7 +1,12 @@
 <template>
   <section class="daily-page">
     <article class="grid dailies">
-      <w-card v-for="item in dailies" :key="item.name" :title="item.name" @click="jump(item.name)">
+      <w-card
+        v-for="item in dailies"
+        :key="item.name"
+        :title="'Daily: ' + item.name"
+        @click="jump(item.name)"
+      >
         <img
           class="daily-card-img"
           src="https://1source.unsplash.com/random/240x240/?nature,water"
@@ -32,6 +37,10 @@ function jump(name) {
 </script>
 
 <style lang="stylus" scoped>
+@css {
+  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -44,7 +53,11 @@ function jump(name) {
 
     &:hover {
       transform: translate3d(0, -3px, 0);
-      box-shadow: 0 0 6px rgb(0 0 0 / 10%), 0 4px 6px rgb(0 0 0 / 10%);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    :deep(.w-card-title) {
+      font-family: 'Black Ops One', cursive;
     }
   }
 }

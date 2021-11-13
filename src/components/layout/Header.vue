@@ -14,12 +14,15 @@
         <nav class="nav">
           <ul class="menu-nav app-header-nav">
             <li>
-              <router-link class="menu-link text-effect-1" to="/home" data-hover="Home">Home</router-link>
+              <router-link class="menu-link text-effect-1" to="/home" data-hover="Home">
+                Home
+              </router-link>
             </li>
             <li>
-              <router-link class="menu-link text-effect-1" to="/daily" data-hover="Daily">Daily</router-link>
+              <router-link class="menu-link text-effect-1" to="/daily" data-hover="Daily">
+                Daily
+              </router-link>
             </li>
-
             <li>
               <a class="setting-btn" href="javascript:;" @click="toggleTheme">
                 <w-icon :name="theme" />
@@ -56,6 +59,14 @@ function toggleTheme() {
 </script>
 
 <style lang="stylus">
+@css {
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+}
+
+.menu-link {
+  font-family: 'Pacifico', cursive;
+}
+
 .settings {
   position: absolute;
   top: 0;
