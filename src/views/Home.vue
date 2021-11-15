@@ -2,11 +2,11 @@
   <div class="home-page">
     <div class="author">
       <div class="avatar shadow shadow-moving">
-        <Bubble class="bubble-moving">
+        <w-bubble class="bubble-moving">
           <svg class="icon svg-icon avatar-logo">
             <use xlink:href="#icon-logo@2x" />
           </svg>
-        </Bubble>
+        </w-bubble>
       </div>
       <div class="nickname box-reflect">Weijuer</div>
       <div class="description text-shadowing">Talking is cheap, show me the codes.</div>
@@ -44,16 +44,8 @@
   </div>
 </template>
 
-<script>
-import { Bubble } from 'Widgets';
-
-export default {
-  name: 'home',
-  components: {
-    Bubble,
-  },
-  setup() {},
-};
+<script setup>
+import { WBubble } from 'Widgets';
 </script>
 
 <style lang="stylus" scoped>

@@ -22,7 +22,7 @@
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import { reactive, computed } from 'vue';
-import { Article as WArticle } from 'Widgets';
+import { WArticle } from 'Widgets';
 
 const store = useStore();
 const route = useRoute();

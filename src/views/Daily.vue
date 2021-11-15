@@ -21,7 +21,6 @@
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
-import { Article as WArticle } from 'Widgets';
 
 const dailies = computed(() => store.getters['daily/dailies']);
 
