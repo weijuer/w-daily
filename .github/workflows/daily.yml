@@ -32,10 +32,13 @@ jobs:
         run: |
           yarn --frozen-lockfile
           yarn serve
+      - name: set today
+        id: set-today
+        run: echo '::set-output name=Today::$(echo date +%Y-%m-%d)'
 
       - name: Add & Commit
         uses: EndBug/add-and-commit@v7
         with:
           add: "data"
-          message: "📈 Today's daily data"
+          message: Today's daily data of ${{steps.set-today.outputs.Today}}"
           branch: gh-pages
