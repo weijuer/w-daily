@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: set today
         id: set-today
-        run: echo '::set-output name=Today::`$(echo date +%Y-%m-%d)`'
+        run: echo "::set-output name=Today::`$(echo date +%Y-%m-%d)`"
 
       - name: Checkout 🛎️
         run: Today's ${{steps.set-today.outputs.Today}}
