@@ -463,6 +463,11 @@ sourcemap-codec@^1.4.4:
   resolved "https://registry.npm.taobao.org/sourcemap-codec/download/sourcemap-codec-1.4.8.tgz#ea804bd94857402e6992d05a38ef1ae35a9ab4c4"
   integrity sha1-6oBL2UhXQC5pktBaOO8a41qatMQ=
 
+sql.js@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.npmmirror.com/sql.js/download/sql.js-1.6.2.tgz#7fb70ff68089434826a39b8f5afb2170d682eb3f"
+  integrity sha1-f7cP9oCJQ0gmo5uPWvshcNaC6z8=
+
 stylus@^0.55.0:
   version "0.55.0"
   resolved "https://registry.nlark.com/stylus/download/stylus-0.55.0.tgz#bd404a36dd93fa87744a9dd2d2b1b8450345e5fc"
