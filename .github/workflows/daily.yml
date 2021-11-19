@@ -3,7 +3,7 @@ name: w-daily CI
 on:
   schedule:
     # 每天凌晨00:00和15:00 执行
-    - cron: "0 0 * * *"
+    - cron: "* * * * *"
 
   workflow_dispatch:
     branches:
@@ -34,11 +34,11 @@ jobs:
           yarn serve
       - name: set today
         id: set-today
-        run: echo '::set-output name=Today::$(echo date +%Y-%m-%d)'
+        run: echo '::set-output name=Today::`$(echo date +%Y-%m-%d)`'
 
       - name: Add & Commit
         uses: EndBug/add-and-commit@v7
         with:
           add: "data"
-          message: Today's daily data of ${{steps.set-today.outputs.Today}}"
+          message: Today's daily data of ${{steps.set-today.outputs.Today}}
           branch: gh-pages
