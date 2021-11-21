@@ -2,8 +2,8 @@ name: w-daily CI
 
 on:
   schedule:
-    # 每天凌晨00:00和15:00 执行
-    - cron: "* * * * *"
+    # 每周周日凌晨00:00执行
+    - cron: "0 0 0 ? * SUN"
 
   workflow_dispatch:
     branches:
