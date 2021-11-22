@@ -1,4 +1,4 @@
-import { get_all_dailies } from '../../api/daily';
+import { get_all_dailies } from 'Api/daily';
 
 // initial state
 const state = {
@@ -16,10 +16,9 @@ const getters = {
 
 // actions
 const actions = {
-  getAllDaily({ commit }) {
-    get_all_dailies((dailies) => {
-      commit('setDailies', dailies);
-    });
+  async getAllDaily({ commit }) {
+    const dailies = await get_all_dailies();
+    commit('setDailies', dailies);
   },
   setCurrent({ commit }, current) {
     commit('setCurrent', current);

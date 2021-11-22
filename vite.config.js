@@ -21,6 +21,8 @@ export default defineConfig({
       Store: resolve('src/store'),
       Layout: resolve('src/components/layout'),
       Widgets: resolve('src/components/widgets'),
+      Service: resolve('src/service'),
+      DB: resolve('src/db'),
     },
   },
   server: {

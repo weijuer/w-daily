@@ -7,8 +7,6 @@ import { Pin, LoadMore } from './directives';
 import 'w-design-vue/lib/style.css';
 import wd from 'w-design-vue';
 
-import './worker/db-worker';
-
 // 创建Vue应用，
 const app = createApp(App);
 // 注册插件
