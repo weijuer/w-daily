@@ -39,7 +39,7 @@ export function execute(commands) {
   return new Promise((resolve, reject) => {
     worker.onmessage = (e) => {
       if (e.data.id === 2) {
-        resolve(e.data);
+        resolve(toJSON(e.data));
       }
     };
 
@@ -47,6 +47,21 @@ export function execute(commands) {
       reject(e);
     };
   });
+}
+
+/**
+ * 数据转换
+ * @param {*} data 
+ * @returns 
+ */
+const toJSON = (data) => {
+  return data.map(([columns, values]) => {
+    const obj = {};
+    columns.forEach((column, index) => {
+      obj[column] = values[index];
+    });
+    return obj;
+  })
 }
 
 await open();
