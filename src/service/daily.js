@@ -1,9 +1,9 @@
 import { execute } from 'DB/db';
 
 export const getDailies = async () => {
-  const {results} = await execute('SELECT * FROM dailies');
-  console.log(results);
-  return results;
+  const res = await execute('SELECT * FROM dailies');
+  console.log(res);
+  return res;
 };
 
 export const getDaily = async (id) => {

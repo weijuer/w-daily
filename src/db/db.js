@@ -39,7 +39,7 @@ export function execute(commands) {
   return new Promise((resolve, reject) => {
     worker.onmessage = (e) => {
       if (e.data.id === 2) {
-        resolve(toJSON(e.data));
+        resolve(toJSON(e.data.results));
       }
     };
 
@@ -55,12 +55,15 @@ export function execute(commands) {
  * @returns 
  */
 const toJSON = (data) => {
-  return data.map(([columns, values]) => {
+  return data.map(({columns, values: rows}) => {
     const obj = {};
-    columns.forEach((column, index) => {
-      obj[column] = values[index];
+    return rows.map((row) => {
+      row.map((column, index) => {
+        obj[columns[index]] = column;
+      });
+
+      return obj;
     });
-    return obj;
   })
 }
 
