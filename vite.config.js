@@ -1,13 +1,21 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import legacy from '@vitejs/plugin-legacy'
 import { resolve } from 'path';
 import { name } from './package.json';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    legacy({
+      targets: ['ie >= 11'],
+      additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+    }),
+  ],
   base: `/${name}/`,
   build: {
+    target: 'es6',
     outDir: 'docs',
   },
   resolve: {
@@ -79,9 +87,7 @@ export default defineConfig({
     },
     fs: {
       strict: false,
-      allow: [  
-        '..',
-      ]
+      allow: ['..'],
     },
   },
 });

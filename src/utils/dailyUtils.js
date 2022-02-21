@@ -6,7 +6,7 @@ console.log(modules);
 export function generateDaily() {
   // 递归获取 views 文件夹下的所有.vue文件
   return Object.entries(modules).map(([fileName, { default: articles }]) => {
-    const [_, name] = fileName.match(/([0-9a-zA-Z\-]+)\.json$/);
+    const [, name] = fileName.match(/([0-9a-zA-Z\-]+)\.json$/);
     return {
       name,
       articles,

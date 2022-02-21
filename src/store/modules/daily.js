@@ -1,24 +1,27 @@
-import { get_all_dailies } from 'Api/daily';
+import { getDailyList } from 'Api/daily';
 
 // initial state
 const state = {
   current: null,
-  dailies: [],
+  dailyList: [],
 };
 
 // getters
 const getters = {
-  dailies: (state) => state.dailies,
-  currentDailies: (state) => {
-    return state.dailies ? state.dailies.find(({ name }) => name === state.current).articles : [];
+  dailyList: (state) => state.dailyList,
+  currentDailyList: (state) => {
+    return state.dailyList
+      ? state.dailyList.find(({ name }) => name === state.current).articles
+      : [];
   },
 };
 
 // actions
 const actions = {
-  async getAllDaily({ commit }) {
-    const dailies = await get_all_dailies();
-    commit('setDailies', dailies);
+  async getDailyList({ commit }) {
+    const dailyList = await getDailyList();
+    console.log('getDailyList', dailyList);
+    commit('setDailyList', dailyList);
   },
   setCurrent({ commit }, current) {
     commit('setCurrent', current);
@@ -27,8 +30,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  setDailies(state, dailies) {
-    state.dailies = dailies;
+  setDailyList(state, dailyList) {
+    state.dailyList = dailyList;
   },
   setCurrent(state, current) {
     state.current = current;

@@ -1,11 +1,11 @@
 <template>
   <section class="daily-page">
-    <article class="grid dailies">
+    <article class="grid daily-list">
       <w-card
-        v-for="item in dailies"
-        :key="item.name"
-        :title="'Daily: ' + item.name"
-        @click="jump(item.name)"
+        v-for="item in dailyList"
+        :key="item.id"
+        :title="'Daily: ' + item.title"
+        @click="jump(item.title)"
       >
         <img
           class="daily-card-img"
@@ -22,15 +22,15 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 
-const dailies = computed(() => store.getters['daily/dailies']);
+const dailyList = computed(() => store.getters['daily/dailyList']);
 
 const router = useRouter();
 const store = useStore();
 
-store.dispatch('daily/getAllDaily');
+store.dispatch('daily/getDailyList');
 
 function jump(name) {
-  store.dispatch('daily/setCurrent', name);
+  store.dispatch('daily/setCurrent');
   router.push({ path: '/articles' });
 }
 </script>
@@ -46,7 +46,7 @@ function jump(name) {
   gap: 2%;
 }
 
-.dailies {
+.daily-list {
   .w-card {
     transition: transform 0.2s linear;
 

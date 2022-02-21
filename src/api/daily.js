@@ -1,12 +1,17 @@
-import { getDailies } from 'Service/daily';
+import dailyService from 'Service/daily';
 
 /**
- * 获取全部文章列表
+ * 获取全部日志列表
  */
-export function get_all_dailies() {
-  return getDailies();
+export function getDailyList() {
+  return dailyService.getDailyList();
 }
 
-export function get_article() {
-  return dailies;
+/**
+ * 查询单个日志详情
+ * @param {*} id
+ * @returns
+ */
+export function getDaily(id) {
+  return dailyService.getDaily(id);
 }

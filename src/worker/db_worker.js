@@ -1,11 +1,11 @@
-// import Worker from 'sql.js/dist/worker.sql-wasm-debug.js?worker';
-export const worker = new Worker('node_modules/sql.js/dist/worker.sql-wasm-debug.js');
+import workerURL from 'sql.js/dist/worker.sql-wasm-debug.js?url';
+import dailyService from 'Service/daily';
 
-const fetchDB = () => fetch('/data/daily.db').then((response) => response.arrayBuffer());
+const worker = new Worker(workerURL);
 
 // Open a database
 export const open = async () => {
-  const buffer = await fetchDB();
+  const buffer = await fetch('/data/daily.db').then((response) => response.arrayBuffer());
   worker.postMessage({
     id: 1,
     action: 'open',
@@ -51,11 +51,11 @@ export function execute(commands) {
 
 /**
  * 数据转换
- * @param {*} data 
- * @returns 
+ * @param {*} data
+ * @returns
  */
 const toJSON = (data) => {
-  return data.map(({columns, values: rows}) => {
+  return data.map(({ columns, values: rows }) => {
     const obj = {};
     return rows.map((row) => {
       row.map((column, index) => {
@@ -64,7 +64,14 @@ const toJSON = (data) => {
 
       return obj;
     });
-  })
-}
+  });
+};
 
-await open();
+export const init = async () => {
+  await open();
+  const [res] = await execute('SELECT * FROM daily');
+  console.log('init_db_worker', res);
+  dailyService.bulkDaily(res);
+};
+
+init();
