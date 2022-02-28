@@ -10,14 +10,14 @@ const log = (...args) => {
 class Browser {
   constructor(options = {}) {
     this.options = {
-      // 关闭headless模式, 不会打开浏览器
+      // headless模式
       headless: true,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
         `--user-agent=${randomUA()}`
       ],
-      // 如果是访问https页面 此属性会忽略https错误
+      // 忽略https错误
       ignoreHTTPSErrors: true,
       // 默认视口
       defaultViewport: { width: 1280, height: 1080 },
@@ -42,6 +42,7 @@ class Browser {
       log("浏览器已启动...");
       this.browser.once("disconnected", () => {
         this.browser = null;
+        log("浏览器已失去连接！");
       });
     }
     return this.browser;
@@ -83,12 +84,10 @@ class Browser {
    * 跳转到目标地址
    * @param {*} url
    */
-  async open(url) {
-    log("目标地址跳转...");
+  async goto(url) {
     await this.page.goto(url, {
       waitUntil: "networkidle2"
     });
-    log(`已跳转至目标(${url})地址...`);
   }
 
   /**
@@ -98,7 +97,7 @@ class Browser {
     // init
     await this.initPage();
     // 打开浏览器
-    await this.open(url);
+    await this.goto(url);
     log("开始打印PDF中...");
     await this.page.pdf({ path: "page.pdf" });
     log("打印PDF完毕...");
@@ -113,7 +112,7 @@ class Browser {
     // init
     await this.initPage();
     // 打开浏览器
-    await this.open(url);
+    await this.goto(url);
     log("开始截图中...");
     await this.page.screenshot({
       path: "screenshot.png",
@@ -135,7 +134,7 @@ class Browser {
     await this.initPage();
     log("主程序加载中...");
     // 打开浏览器
-    await this.open(url);
+    await this.goto(url);
     log(`页面初次加载完毕, 等待目标元素(${target})...`);
     // 等待被选的元素
     await this.page.waitForSelector(target);
@@ -160,24 +159,63 @@ class Browser {
     // init
     await this.initPage();
     log("请求拦截加载中...");
-    // 订阅reponse事件
-    this.page.on("response", async (response) => {
-      // 截取目标请求
-      if (response.url().includes(target)) {
-        log(`获取目标(${target})请求中`);
-        const { data } = await response.json();
-        this.data = data;
-        log(`获取请求数据(${chalk.redBright(data.length)})条`);
-      }
-    });
-
+    const waitForResponse = this.getResponseBody(target);
     // 打开浏览器
-    await this.open(url);
+    await this.goto(url);
 
+    // A.
+    // const { data } = await this.getResponse(target);
+    // B.
+    const { data } = await waitForResponse;
+
+    log("请求拦截加载完毕...", data);
     // 关闭浏览器
     await this.exit();
 
-    return this.data;
+    return data;
+  }
+
+  /**
+   * A.重载页面拦截请求
+   * TODO: 待优化
+   * @param {*} target
+   * @returns
+   */
+  async getResponse(target) {
+    log("开始获取数据...");
+    // 页面重载
+    await this.page.reload();
+    const finalResponse = await this.page.waitForResponse(
+      (response) => response.url().includes(target),
+      { timeout: 10000 }
+    );
+    log("请求拦截完毕...");
+    return finalResponse.json();
+  }
+
+  /**
+   * B.通过订阅reponse获取response body
+   * @param {*} target目标请求
+   * @returns
+   */
+  getResponseBody(target) {
+    return new Promise((resolve, reject) => {
+      // 订阅reponse事件
+      this.page.on("response", async function (response) {
+        // 截取目标请求
+        if (response.url().includes(target)) {
+          log(`获取目标请求(${target})数据中...`);
+          if (response.ok()) {
+            const data = await response.json();
+            log("获取目标请求数据完毕...");
+            resolve(data);
+          } else {
+            log("获取目标请求数据失败...");
+            reject(response);
+          }
+        }
+      });
+    });
   }
 
   /**
