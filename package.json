@@ -18,21 +18,21 @@
   },
   "homepage": "https://github.com/weijuer/w-daily#readme",
   "dependencies": {
-    "axios": "0.26.0",
+    "axios": "0.26.1",
     "dexie": "^3.2.1",
     "sql.js": "^1.6.2",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.12",
+    "vue-router": "^4.0.14",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0",
     "w-design-vue": "^0.0.10"
   },
   "devDependencies": {
-    "@vitejs/plugin-legacy": "^1.7.1",
-    "@vitejs/plugin-vue": "^2.2.2",
+    "@vitejs/plugin-legacy": "^1.8.0",
+    "@vitejs/plugin-vue": "^2.3.1",
     "@vue/compiler-sfc": "^3.2.31",
-    "stylus": "^0.56.0",
-    "vite": "^2.8.4"
+    "stylus": "^0.57.0",
+    "vite": "^2.9.1"
   },
   "browserslist": [
     ">0.2%",
