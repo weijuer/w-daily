@@ -8,7 +8,7 @@
           </svg>
         </w-bubble>
       </div>
-      <div class="nickname box-reflect">Weijuer</div>
+      <div class="nickname box-reflect">W.J</div>
       <div class="description text-shadowing">Talking is cheap, show me the codes.</div>
       <div class="links hidden">
         <nav class="social-links">

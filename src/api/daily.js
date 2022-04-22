@@ -1,10 +1,12 @@
-import dailyService from 'Service/daily';
+import DailyService from 'Service/DailyService';
+
+const dailyService = new DailyService();
 
 /**
  * 获取全部日志列表
  */
 export function getDailyList() {
-  return dailyService.getDailyList();
+  return dailyService.findAll();
 }
 
 /**
@@ -13,5 +15,5 @@ export function getDailyList() {
  * @returns
  */
 export function getDaily(id) {
-  return dailyService.getDaily(id);
+  return dailyService.findOne(id);
 }

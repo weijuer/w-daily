@@ -9,10 +9,8 @@ const state = {
 // getters
 const getters = {
   dailyList: (state) => state.dailyList,
-  currentDailyList: (state) => {
-    return state.dailyList
-      ? state.dailyList.find(({ name }) => name === state.current).articles
-      : [];
+  articles: (state) => {
+    return state.dailyList ? state.dailyList.find(({ id }) => id === state.current).articles : [];
   },
 };
 
@@ -20,11 +18,10 @@ const getters = {
 const actions = {
   async getDailyList({ commit }) {
     const dailyList = await getDailyList();
-    console.log('getDailyList', dailyList);
     commit('setDailyList', dailyList);
   },
-  setCurrent({ commit }, current) {
-    commit('setCurrent', current);
+  setCurrent({ commit }, id) {
+    commit('setCurrent', id);
   },
 };
 

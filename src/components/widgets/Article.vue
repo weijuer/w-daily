@@ -5,44 +5,46 @@
         :data-id="article._id"
         v-if="isLinked"
         :to="{ name: 'article-detail', query: { id: article._id } }"
-      >{{ article.title }}</router-link>
-      <span v-else>{{ article.title }}</span>
+        >{{ article.article_title }}</router-link
+      >
+      <span v-else>{{ article.article_title }}</span>
     </header>
     <div class="article-author">
-      <strong>{{ article.author }}</strong>
-      <time :datetime="article.lastModified">{{ article.lastModified }}</time>
+      <strong v-for="author in article.author">{{ author.nickname }}</strong>
+      <time :datetime="formatTimestamp(article.utime)">{{ formatTimestamp(article.utime) }}</time>
     </div>
     <div class="article-content">
-      <p class="article-description">{{ article.description }}</p>
+      <p class="article-description">{{ article.article_summary }}</p>
       <a v-if="isLinked" class="read-more" :href="moreLink(article)">Read more</a>
     </div>
-    <div v-if="article.tags" class="article-tags">
+    <div v-if="article.topic" class="article-tags">
       <a
-        v-for="(tag, index) of tags()"
+        v-for="(tag, index) of article.topic"
         :key="`tag-${index}`"
         class="tag-item bg-color"
         href="tag/"
-      >{{ tag }}</a>
+        >{{ tag.name }}</a
+      >
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue';
+import { formatTimestamp } from 'Utils/common';
 
 const props = defineProps({
   type: { type: String, default: 'normal' },
-  article: { default: () => { }, type: Object },
+  article: { default: () => {}, type: Object },
 });
 
 const emit = defineEmits(['desc-click']);
 
-const tags = computed(() => props.article.tags && props.article.tags.split(','));
 const articleType = computed(() => (props.type ? `article-${props.type}` : ''));
 const isLinked = computed(() => props.type && props.type === 'list');
 
 function moreLink(article) {
-  return `https://www.infoq.cn${article.url}`;
+  return `https://www.infoq.cn/${article.uuid}`;
 }
 </script>
 
@@ -121,7 +123,7 @@ export default {
     line-height: 1.8;
 
     .tag-item {
-      color: #fff;
+      color: #6a6a6a;
       text-transform: uppercase;
       font-weight: 700;
       font-size: 0.66rem;
@@ -131,7 +133,7 @@ export default {
       padding: 0.2rem 0.85rem 0.25rem 0.85rem;
 
       &:hover {
-        color: darken(#fff, 10);
+        color: darken(#6a6a6a, 10);
         position: relative;
       }
     }

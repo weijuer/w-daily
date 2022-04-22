@@ -1,52 +1,72 @@
 import workerURL from 'sql.js/dist/worker.sql-wasm-debug.js?url';
 import dailyService from 'Service/daily';
 
-const worker = new Worker(workerURL);
+class DBWorker {
+  constructor() {
+    this.worker = new Worker(workerURL);
+    this._ready = false;
+  }
 
-// Open a database
-export const open = async () => {
-  const buffer = await fetch('/data/daily.db').then((response) => response.arrayBuffer());
-  worker.postMessage({
-    id: 1,
-    action: 'open',
-    buffer: buffer,
-  });
+  get #_ready() {
+    return this._ready;
+  }
 
-  return new Promise((resolve, reject) => {
-    worker.onmessage = (e) => {
-      if (e.data.id === 1) {
-        resolve(e.data);
-      }
-    };
+  set #_ready(ready) {
+    this._ready = ready;
+  }
 
-    worker.onerror = (e) => {
-      reject(e);
-    };
-  });
-};
+  // Open a database
+  async open(filePath = '/data/daily.db') {
+    const buffer = await fetch(filePath).then((response) => response.arrayBuffer());
+    this.worker.postMessage({
+      id: 1,
+      action: 'open',
+      buffer: buffer,
+    });
 
-/**
- * 执行sql语句
- * @param {*} commands
- */
-export function execute(commands) {
-  worker.postMessage({
-    id: 2,
-    action: 'exec',
-    sql: commands,
-  });
+    return this.getMessage();
+  }
 
-  return new Promise((resolve, reject) => {
-    worker.onmessage = (e) => {
-      if (e.data.id === 2) {
-        resolve(toJSON(e.data.results));
-      }
-    };
+  /**
+   * 执行sql语句
+   * @param {*} commands
+   */
+  execute(commands) {
+    this.worker.postMessage({
+      id: 2,
+      action: 'exec',
+      sql: commands,
+    });
 
-    worker.onerror = (e) => {
-      reject(e);
-    };
-  });
+    return this.getMessage();
+  }
+
+  /**
+  * 获取消息
+  * @returns {Promise} 
+  */
+  getMessage() {
+    return new Promise((resolve, reject) => {
+      this.worker.onmessage = (e) => {
+
+        if (e.data.error) {
+          reject(e.data.error);
+        }
+
+        if (e.data.ready) {
+          resolve('db is ready');
+        }
+
+        if (e.data.results) {
+          resolve(toJSON(e.data.results));
+        }
+      };
+
+      this.worker.onerror = (e) => {
+        reject(e);
+      };
+    });
+  }
 }
 
 /**
@@ -67,11 +87,12 @@ const toJSON = (data) => {
   });
 };
 
-export const init = async () => {
-  await open();
-  const [res] = await execute('SELECT * FROM daily');
+export const run = async () => {
+  const db = new DBWorker();
+  await db.open();
+  const [res] = await db.execute('SELECT * FROM daily').catch(console.error);
   console.log('init_db_worker', res);
-  dailyService.bulkDaily(res);
+  // dailyService.bulkDaily(res);
 };
 
-init();
+run();

@@ -4,7 +4,7 @@
       <div class="articles">
         <transition-group appear>
           <w-article
-            v-for="(article, index) of currentDailies"
+            v-for="(article, index) of articles"
             :article="article"
             :key="`article-${index}`"
             type="list"
@@ -13,7 +13,7 @@
       </div>
     </article>
     <aside>
-      <w-card title="分类">测试</w-card>
+      <w-card title="广告位">测试</w-card>
     </aside>
   </section>
 </template>
@@ -27,7 +27,7 @@ import { WArticle } from 'Widgets';
 const store = useStore();
 const route = useRoute();
 
-const currentDailies = computed(() => store.getters['daily/currentDailies']);
+const articles = computed(() => store.getters['daily/articles']);
 
 function beforeEnter(el) {
   el.style.opacity = 0;

@@ -4,8 +4,8 @@
       <w-card
         v-for="item in dailyList"
         :key="item.id"
-        :title="'Daily: ' + item.title"
-        @click="jump(item.title)"
+        :title="'Daily: ' + item.name"
+        @click="jump(item.id)"
       >
         <img
           class="daily-card-img"
@@ -22,15 +22,14 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 
-const dailyList = computed(() => store.getters['daily/dailyList']);
-
 const router = useRouter();
 const store = useStore();
-
 store.dispatch('daily/getDailyList');
 
-function jump(name) {
-  store.dispatch('daily/setCurrent');
+const dailyList = computed(() => store.getters['daily/dailyList']);
+
+function jump(id) {
+  store.dispatch('daily/setCurrent', id);
   router.push({ path: '/articles' });
 }
 </script>
@@ -42,7 +41,8 @@ function jump(name) {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
   gap: 2%;
 }
 
@@ -63,17 +63,5 @@ function jump(name) {
 
 .daily-card-img {
   height: 180px;
-}
-
-@media (max-width: 992px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 568px) {
-  .grid {
-    grid-auto-columns: minmax(100px, 1fr);
-  }
 }
 </style>
