@@ -13,7 +13,7 @@
       </div>
     </article>
     <aside>
-      <w-card title="广告位">测试</w-card>
+      <w-card title="广告位">空缺</w-card>
     </aside>
   </section>
 </template>
