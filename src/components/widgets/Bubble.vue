@@ -4,7 +4,11 @@
   </div>
 </template>
 
-
+<script>
+export default {
+  name: 'Bubble',
+};
+</script>
 
 <script setup>
 import { computed } from 'vue';
@@ -16,7 +20,7 @@ const props = defineProps({
 const bubbleType = computed(() => (props.type ? `bubble-${props.type}` : ''));
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .bubble {
   display: flex;
   justify-content: center;

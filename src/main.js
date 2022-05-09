@@ -9,7 +9,7 @@ import wd from 'w-design-vue';
 
 // import './worker/db_worker';
 
-import 'Utils/dailyUtils';
+// import 'Utils/dailyUtils';
 
 // 创建Vue应用，
 const app = createApp(App);

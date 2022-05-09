@@ -26,10 +26,5 @@ export default {
       default: '',
     },
   },
-}
+};
 </script>
-
-<style lang="stylus" scoped>
-.u-view {
-}
-</style>
