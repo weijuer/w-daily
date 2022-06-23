@@ -13,7 +13,6 @@ export default defineConfig({
   build: {
     target: 'es6',
     outDir: 'docs',
-    sourcemap: true,
   },
   resolve: {
     alias: {
