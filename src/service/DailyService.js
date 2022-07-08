@@ -1,8 +1,8 @@
-import { generateDaily } from 'Utils/dailyUtils';
+import dailies from '~dailies';
 
 export default class DailyService {
   constructor() {
-    this.dailies = generateDaily();
+    this.dailies = dailies;
   }
 
   findAll() {

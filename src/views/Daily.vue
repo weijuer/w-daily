@@ -1,17 +1,8 @@
 <template>
   <section class="daily-page">
     <article class="grid daily-list">
-      <w-card
-        v-for="item in dailyList"
-        :key="item.id"
-        :title="'Daily: ' + item.name"
-        @click="jump(item.id)"
-      >
-        <img
-          class="daily-card-img"
-          src="https://1source.unsplash.com/random/240x240/?nature,water"
-          alt
-        />
+      <w-card v-for="item in dailyList" :key="item.id" :title="'Daily: ' + item.name" @click="jump(item.id)">
+        <img class="daily-card-img" :src="randomImage" alt />
       </w-card>
     </article>
   </section>
@@ -27,11 +18,13 @@ const store = useStore();
 store.dispatch('daily/getDailyList');
 
 const dailyList = computed(() => store.getters['daily/dailyList']);
+const randomImage = computed(() => `https://1source.unsplash.com/random/240x240/?nature,water&time=${Date.now()}`)
 
 function jump(id) {
   store.dispatch('daily/setCurrent', id);
   router.push({ path: '/articles' });
 }
+
 </script>
 
 <style lang="stylus" scoped>
