@@ -48,4 +48,4 @@ jobs:
           cwd: "public"
           author_name: Weijuer
           message: Today's daily data of ${{steps.set-today.outputs.Today}}
-          branch: gh-pages
+          new_branch: gh-pages
