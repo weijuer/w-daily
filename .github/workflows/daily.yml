@@ -45,7 +45,6 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           add: "data"
-          cwd: "public"
           author_name: Weijuer
           message: Today's daily data of ${{steps.set-today.outputs.Today}}
           new_branch: gh-pages
