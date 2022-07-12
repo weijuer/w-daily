@@ -1,7 +1,12 @@
 <template>
   <section class="daily-page">
     <article class="grid daily-list">
-      <w-card v-for="item in dailyList" :key="item.id" :title="'Daily: ' + item.name" @click="jump(item.id)">
+      <w-card
+        v-for="item in dailyList"
+        :key="item.name"
+        :title="'Daily: ' + item.name"
+        @click="jump(item)"
+      >
         <img class="daily-card-img" :src="randomImage" alt />
       </w-card>
     </article>
@@ -9,22 +14,23 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useDailyStore } from 'Stores/daily';
 
 const router = useRouter();
-const store = useStore();
-store.dispatch('daily/getDailyList');
+const dailyStore = useDailyStore();
+dailyStore.getDailyList();
 
-const dailyList = computed(() => store.getters['daily/dailyList']);
-const randomImage = computed(() => `https://1source.unsplash.com/random/240x240/?nature,water&time=${Date.now()}`)
+const dailyList = computed(() => dailyStore.dailyList);
+const randomImage = computed(
+  () => `https://1source.unsplash.com/random/240x240/?nature,water&time=${Date.now()}`
+);
 
-function jump(id) {
-  store.dispatch('daily/setCurrent', id);
-  router.push({ path: '/articles' });
+function jump(name) {
+  dailyStore.setCurrent(item);
+  router.push({ path: '/articles', params: { name } });
 }
-
 </script>
 
 <style lang="stylus" scoped>

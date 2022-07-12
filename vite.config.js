@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import legacy from '@vitejs/plugin-legacy';
 import { resolve } from 'path';
 import { name } from './package.json';
-import Inspect from 'vite-plugin-inspect'
+import Inspect from 'vite-plugin-inspect';
 import dailiesPlugin from './src/plugins/vite-plugin-dailies';
 
 export default defineConfig({
@@ -11,8 +11,8 @@ export default defineConfig({
     vue(),
     Inspect(),
     dailiesPlugin({
-      dir: '/data/**/*.json'
-    })
+      dir: '/data/**/*.json',
+    }),
   ],
   base: `/${name}/`,
   build: {
@@ -27,7 +27,7 @@ export default defineConfig({
       Assets: resolve('src/assets'),
       Mixins: resolve('src/mixins'),
       Utils: resolve('src/utils'),
-      Store: resolve('src/store'),
+      Stores: resolve('src/stores'),
       Layout: resolve('src/components/layout'),
       Widgets: resolve('src/components/widgets'),
       Service: resolve('src/service'),

@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import store from './store';
+import store from './stores';
 import { Pin, LoadMore } from './directives';
 // 全局引入样式文件
 import 'w-design-vue/lib/style.css';
