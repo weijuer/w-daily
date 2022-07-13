@@ -2,11 +2,12 @@
   <section class="grid article-page">
     <article>
       <div class="articles">
-        <transition-group appear>
+        <transition-group :css="false" @before-enter="onBeforeEnter" @enter="onEnter" appear>
           <w-article
             v-for="(article, index) of articles"
             :article="article"
             :key="`article-${index}`"
+            :data-index="index"
             type="list"
           />
         </transition-group>
@@ -19,28 +20,23 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
-import { useRoute } from 'vue-router';
-import { reactive, computed } from 'vue';
+import { computed } from 'vue';
 import { WArticle } from 'Widgets';
+import { useDailyStore } from 'Stores/daily';
 
-const store = useStore();
-const route = useRoute();
+const dailyStore = useDailyStore();
+const articles = computed(() => dailyStore.articles);
 
-const articles = computed(() => store.getters['daily/articles']);
-
-function beforeEnter(el) {
+function onBeforeEnter(el) {
   el.style.opacity = 0;
 }
 
-function enter(el, done) {
-  // console.log(el.dataset.index)
+function onEnter(el, done) {
   let delay = el.dataset.index * 300;
+  el.style.transition = 'all 0.3s linear';
+  el.style.animation = 'one-in 0.3s infinite';
   setTimeout(() => {
-    el.style.transition = 'opacity 0.3s ';
     el.style.opacity = 1;
-    el.style.animation = 'one-in 0.3s infinite';
-    el.style['animation-iteration-count'] = 1;
     done();
   }, delay);
 }
@@ -65,19 +61,6 @@ function enter(el, done) {
   }
 }
 
-.v-list-enter, .v-leave-to {
-  opacity: 0;
-  transform: translateY(80px);
-}
-
-.v-enter-active, .v-leave-active {
-  transition: all 0.6s ease;
-}
-
-.v-leave-active {
-  position: absolute;
-}
-
 @media (max-width: 768px) {
   .article-page {
     grid-template-columns: auto;
@@ -87,5 +70,17 @@ function enter(el, done) {
       display: none;
     }
   }
+}
+
+
+@keyframes one-in {
+    from {
+        padding-top: 100px;
+        height: 0%;
+    }
+    to {
+        padding-top: 0px;
+        height: 100%;
+    }
 }
 </style>

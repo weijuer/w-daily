@@ -8,7 +8,7 @@ export const useDailyStore = defineStore('daily', {
   }),
   getters: {
     articles: (state) => {
-      return state.dailyList
+      return state.dailyList && state.current
         ? state.dailyList.find(({ name }) => name === state?.current?.name).articles
         : [];
     },
@@ -16,10 +16,7 @@ export const useDailyStore = defineStore('daily', {
   actions: {
     async getDailyList() {
       const dailyList = await getDailyList();
-      this.updateDailyList(dailyList);
-    },
-    updateDailyList(payload) {
-      this.dailyList = payload;
+      this.dailyList = dailyList;
     },
     setCurrent(current) {
       this.current = current;
@@ -27,5 +24,9 @@ export const useDailyStore = defineStore('daily', {
     clearDailyList() {
       this.$reset();
     },
+  },
+  // 开启数据缓存
+  persist: {
+    enabled: true,
   },
 });

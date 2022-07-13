@@ -1,14 +1,17 @@
 <template>
   <section class="daily-page">
     <article class="grid daily-list">
-      <w-card
-        v-for="item in dailyList"
-        :key="item.name"
-        :title="'Daily: ' + item.name"
-        @click="jump(item)"
-      >
-        <img class="daily-card-img" :src="randomImage" alt />
-      </w-card>
+      <transition-group :css="false" @before-enter="onBeforeEnter" @enter="onEnter" appear>
+        <w-card
+          v-for="(item, index) in dailyList"
+          :key="item.name"
+          :title="'Daily: ' + item.name"
+          :data-index="index"
+          @click="jump(item)"
+        >
+          <img class="daily-card-img" :src="randomImage" alt />
+        </w-card>
+      </transition-group>
     </article>
   </section>
 </template>
@@ -27,9 +30,24 @@ const randomImage = computed(
   () => `https://1source.unsplash.com/random/240x240/?nature,water&time=${Date.now()}`
 );
 
-function jump(name) {
+function jump(item) {
   dailyStore.setCurrent(item);
-  router.push({ path: '/articles', params: { name } });
+  router.push({ name: 'daily-articles', params: { name: item.name } });
+}
+
+function onBeforeEnter(el) {
+  el.style.opacity = 0;
+  el.style.transform = 'translateY(15px)';
+}
+
+function onEnter(el, done) {
+  let delay = el.dataset.index * 200;
+  // el.style.transition = 'all 0.2s ease-out';
+  setTimeout(() => {
+    el.style.opacity = 1;
+    el.style.transform = null;
+    done();
+  }, delay);
 }
 </script>
 
@@ -39,10 +57,11 @@ function jump(name) {
 }
 
 .grid {
+  --max-width: 240px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 2%;
+  grid-template-columns: repeat(auto-fill, minmax(var(--max-width), 1fr));
+  // grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 20px;
 }
 
 .daily-list {

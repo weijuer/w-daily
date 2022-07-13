@@ -14,8 +14,6 @@ specifiers:
   vite-plugin-inspect: ^0.5.1
   vue: ^3.2.37
   vue-router: ^4.0.16
-  vuex: ^4.0.2
-  vuex-persistedstate: ^4.1.0
   w-design-vue: ^0.0.11
 
 dependencies:
@@ -26,8 +24,6 @@ dependencies:
   sql.js: 1.7.0
   vue: 3.2.37
   vue-router: 4.1.1_vue@3.2.37
-  vuex: 4.0.2_vue@3.2.37
-  vuex-persistedstate: 4.1.0_vuex@4.0.2
   w-design-vue: 0.0.11_ye7sw5nid2es3e4qmkjro6ozy4
 
 devDependencies:
@@ -243,11 +239,6 @@ packages:
   /decode-uri-component/0.2.0:
     resolution: {integrity: sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/decode-uri-component/-/decode-uri-component-0.2.0.tgz}
     engines: {node: '>=0.10'}
-
-  /deepmerge/4.2.2:
-    resolution: {integrity: sha512-FJ3UgI4gIl+PHZm53knsuSFpE+nESMr7M4v9QcgB7S63Kj/6WqMiFQJpBBYz1Pt+66bZpP3Q7Lye0Oo9MPKEdg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/deepmerge/-/deepmerge-4.2.2.tgz}
-    engines: {node: '>=0.10.0'}
-    dev: false
 
   /delayed-stream/1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/delayed-stream/-/delayed-stream-1.0.0.tgz}
@@ -639,11 +630,6 @@ packages:
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/sax/-/sax-1.2.4.tgz}
 
-  /shvl/2.0.3:
-    resolution: {integrity: sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/shvl/-/shvl-2.0.3.tgz}
-    deprecated: older versions vulnerable to prototype pollution
-    dev: false
-
   /sirv/2.0.2:
     resolution: {integrity: sha512-4Qog6aE29nIjAOKe/wowFTxOdmbEZKb+3tsLljaBRzJwtqto0BChD2zzH0LhgCSXiI+V7X+Y45v14wBZQ1TK3w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/sirv/-/sirv-2.0.2.tgz}
     engines: {node: '>= 10'}
@@ -799,26 +785,6 @@ packages:
       '@vue/runtime-dom': 3.2.37
       '@vue/server-renderer': 3.2.37_vue@3.2.37
       '@vue/shared': 3.2.37
-
-  /vuex-persistedstate/4.1.0_vuex@4.0.2:
-    resolution: {integrity: sha512-3SkEj4NqwM69ikJdFVw6gObeB0NHyspRYMYkR/EbhR0hbvAKyR5gksVhtAfY1UYuWUOCCA0QNGwv9pOwdj+XUQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/vuex-persistedstate/-/vuex-persistedstate-4.1.0.tgz}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-    peerDependencies:
-      vuex: ^3.0 || ^4.0.0-rc
-    dependencies:
-      deepmerge: 4.2.2
-      shvl: 2.0.3
-      vuex: 4.0.2_vue@3.2.37
-    dev: false
-
-  /vuex/4.0.2_vue@3.2.37:
-    resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/vuex/-/vuex-4.0.2.tgz}
-    peerDependencies:
-      vue: ^3.0.2
-    dependencies:
-      '@vue/devtools-api': 6.2.0
-      vue: 3.2.37
-    dev: false
 
   /w-design-vue/0.0.11_ye7sw5nid2es3e4qmkjro6ozy4:
     resolution: {integrity: sha512-yG8DhkMfitkDaVtuml76cZDVnOuScZ+1AoMYus3KwIN98yYPhPMceqVhFklSoDM/omC/OGyyt3b+yhD8pna7GQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npm.taobao.org/w-design-vue/-/w-design-vue-0.0.11.tgz}
