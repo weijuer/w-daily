@@ -2,9 +2,10 @@
   <div class="article" :class="[articleType]">
     <header class="article-header">
       <router-link
+        class="link"
         :data-id="article._id"
         v-if="isLinked"
-        :to="{ name: 'article-detail', query: { id: article._id } }"
+        :to="{ path: '/daily/article-detail', query: { id: article._id } }"
         >{{ article.article_title }}</router-link
       >
       <span v-else>{{ article.article_title }}</span>
@@ -22,7 +23,7 @@
         v-for="(tag, index) of article.topic"
         :key="`tag-${index}`"
         class="tag-item bg-color"
-        href="tag/"
+        href="/tags"
         >{{ tag.name }}</a
       >
     </div>
@@ -123,7 +124,8 @@ export default {
     line-height: 1.8;
 
     .tag-item {
-      color: #6a6a6a;
+      --tag-bg-color: #108ee9;
+      color: #fff;
       text-transform: uppercase;
       font-weight: 700;
       font-size: 0.66rem;
@@ -131,9 +133,9 @@ export default {
       border-radius: 2rem;
       margin: 0 0.12rem;
       padding: 0.2rem 0.85rem 0.25rem 0.85rem;
+      background-color: var(--tag-bg-color);
 
       &:hover {
-        color: darken(#6a6a6a, 10);
         position: relative;
       }
     }

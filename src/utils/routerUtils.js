@@ -7,7 +7,7 @@ export function generateRoutes() {
 
   return Object.entries(modules).reduce((total, [fileName, component]) => {
     let [, parent, name] = fileName.match(/(?:views\/([\w\-]+)\/)?([\w\-]+)\.vue$/);
-    const path = parent ? name : `/${name}`;
+    let path = parent ? (name === 'index' ? '' : name) : `/${name}`;
     name = parent ? `${parent}-${name}` : name;
     const _component = { name, path, component };
     if (parent) {

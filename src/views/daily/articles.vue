@@ -9,7 +9,7 @@
             :key="`article-${index}`"
             :data-index="index"
             type="list"
-          />
+          ></w-article>
         </transition-group>
       </div>
     </article>

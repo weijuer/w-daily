@@ -3,12 +3,8 @@
 </template>
 
 <script setup>
-import { WArticle } from 'Widgets';
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { WArticle } from 'Widgets';
 
-// 使用vue-router
-const route = useRoute();
-// 文章对象
 const article = ref({});
 </script>
