@@ -1,1 +1,0 @@
-import{_ as e}from"./Article.6c17a016.js";/* empty css                                               */import{l as r,m as t,o as c,g as s,f as l}from"./index.15e372c7.js";const u={__name:"article-detail",setup(o){r();const a=t({});return(i,n)=>(c(),s(l(e),{class:"article-normal",article:a.value,type:"card"},null,8,["article"]))}};export{u as default};
