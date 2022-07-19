@@ -19,6 +19,6 @@
   "homepage": "https://github.com/weijuer/w-daily#readme",
   "devDependencies": {
     "chalk": "^5.0.1",
-    "puppeteer": "^15.3.1"
+    "puppeteer": "^15.4.0"
   }
 }
