@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page">
-    <div class="author">
+  <div ref="home" class="home-page">
+    <div class="hero">
       <div class="avatar shadow shadow-moving">
         <w-bubble class="bubble-moving">
           <svg class="icon svg-icon avatar-logo">
@@ -44,8 +44,36 @@
   </div>
 </template>
 
+<script>
+import 'Utils/custom-background';
+export default {
+  name: 'home',
+};
+</script>
+
 <script setup>
+import { onMounted, ref } from 'vue';
 import { WBubble } from 'Widgets';
+
+const home = ref();
+onMounted(() => {
+  home.value.addEventListener('mouseenter', function (e) {
+    let { left, top } = home.value.getBoundingClientRect();
+    this.style.setProperty('--mouse-x', e.x - left);
+    this.style.setProperty('--mouse-y', e.y - top);
+  });
+
+  home.value.addEventListener('mousemove', function (e) {
+    let { left, top } = home.value.getBoundingClientRect();
+    this.style.setProperty('--mouse-x', e.x - left);
+    this.style.setProperty('--mouse-y', e.y - top);
+  });
+
+  home.value.addEventListener('mouseleave', function (e) {
+    this.style.setProperty('--mouse-x', -999);
+    this.style.setProperty('--mouse-y', -999);
+  })
+})
 </script>
 
 <style lang="stylus" scoped>
@@ -53,9 +81,19 @@ import { WBubble } from 'Widgets';
   @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 }
-$bubble-color = #4cbf30;
 
-.author {
+$bubble-color =#4cbf30;
+
+.home-page {
+  --magnet-color: rgb(97, 123, 255);
+  --magnet-size: 4;
+  --magnet-gap: 40;
+  --magnet-radius: 200;
+  padding: 20px;
+  background-image: paint(magnet-matrix);
+}
+
+.hero {
   height: 60vh;
   display: flex;
   flex-direction: column;
@@ -73,6 +111,18 @@ $bubble-color = #4cbf30;
     .avatar-logo {
       width: 100%;
       height: auto;
+    }
+
+    &:hover {
+      &.shadow-moving {
+        &:after {
+          animation-play-state: paused;
+        }
+      }
+
+      .bubble-moving {
+        animation-play-state: paused;
+      }
     }
   }
 
