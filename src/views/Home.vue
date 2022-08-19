@@ -107,6 +107,8 @@ $bubble-color =#4cbf30;
     width: 8rem;
     height: 8rem;
     margin-bottom: 2rem;
+    filter: invert(1);
+    mix-blend-mode: difference;
 
     .avatar-logo {
       width: 100%;
