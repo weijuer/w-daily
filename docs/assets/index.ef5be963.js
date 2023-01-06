@@ -1,0 +1,1 @@
+import{_,i as r,o as e,j as o,w as t,f as s,v as c,x as i}from"./index.e3431b57.js";const d={};function f(u,l){const a=r("router-view");return e(),o(a,null,{default:t(({Component:n})=>[s(i,{name:"fade-right",mode:"out-in"},{default:t(()=>[(e(),o(c(n)))]),_:2},1024)]),_:1})}var v=_(d,[["render",f],["__scopeId","data-v-08f3a5fe"]]);export{v as default};
