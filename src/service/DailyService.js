@@ -1,5 +1,7 @@
 import dailies from '~dailies';
 
+console.log('~dailies', dailies);
+
 export default class DailyService {
   constructor() {
     this.dailies = dailies;

@@ -1,5 +1,5 @@
 <template>
-  <section class="grid article-page">
+  <section class="wrapper article-page">
     <article>
       <div class="articles">
         <transition-group :css="false" @before-enter="onBeforeEnter" @enter="onEnter" appear>
@@ -43,10 +43,14 @@ function onEnter(el, done) {
 </script>
 
 <style lang="stylus" scoped>
-.grid {
+.wrapper {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 30%;
   gap: 2rem;
+
+  aside {
+    align-self: start;
+  }
 }
 
 .articles {

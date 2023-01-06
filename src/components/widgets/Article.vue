@@ -5,7 +5,7 @@
         class="link"
         :data-id="article._id"
         v-if="isLinked"
-        :to="{ path: '/daily/article-detail', query: { id: article._id } }"
+        :to="{ path: 'article-detail', query: { id: article._id } }"
         >{{ article.article_title }}</router-link
       >
       <span v-else>{{ article.article_title }}</span>

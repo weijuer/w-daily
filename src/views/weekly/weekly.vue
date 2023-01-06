@@ -1,6 +1,6 @@
 <template>
-  <section class="daily-page">
-    <article class="grid daily-list">
+  <section class="weekly-page">
+    <article class="wrapper daily-list">
       <transition-group
         :css="false"
         @before-enter="onBeforeEnter"
@@ -39,7 +39,7 @@ const randomImage = computed(
 
 function jump(item) {
   dailyStore.setCurrent(item);
-  router.push({ name: 'daily-articles' });
+  router.push({ name: 'weekly-daily' });
 }
 
 function onBeforeEnter(el) {
@@ -73,7 +73,7 @@ function onLeave(el, done) {
   @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 }
 
-.grid {
+.wrapper {
   --max-width: 240px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--max-width), 1fr));

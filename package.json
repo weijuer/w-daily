@@ -1,7 +1,7 @@
 {
-  "name": "w-daily",
+  "name": "w-weekly",
   "version": "1.0.0",
-  "description": "An awnsome fronend daily blog",
+  "description": "An awnsome fronend weekly blog",
   "author": "Weijuer",
   "license": "MIT",
   "scripts": {

@@ -4,13 +4,13 @@ import legacy from '@vitejs/plugin-legacy';
 import { resolve } from 'path';
 import { name } from './package.json';
 import Inspect from 'vite-plugin-inspect';
-import dailiesPlugin from './src/plugins/vite-plugin-dailies';
+import Daily from './src/plugins/vite-plugin-dailies';
 
 export default defineConfig({
   plugins: [
     vue(),
     Inspect(),
-    dailiesPlugin({
+    Daily({
       dir: '/data/**/*.json',
     }),
   ],

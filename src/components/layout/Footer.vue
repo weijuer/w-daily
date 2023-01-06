@@ -3,8 +3,8 @@
     <div class="container">
       <div class="app-footer-content">
         <div class="app-footer-logo">
-          <span class="copyright">2021~2022©</span>
-          <a class="logo-letter" href>W.J</a>
+          <span class="copyright">2021~2023</span>
+          <a class="logo-letter" href>©W.J</a>
         </div>
         <div class="app-footer-nav">
           <ul class="menu-nav">
